@@ -14,6 +14,7 @@ import { Button } from '@/components/ui/button';
 import { useSession } from 'next-auth/react'
 import { useToast } from '@/components/ui/use-toast'
 import { useRouter } from 'next/navigation'
+import SwatchIcon from '@/components/ui/icons/SwatchIcon'
 
 type ComponentProps = {
   referral: referralType;
@@ -52,10 +53,10 @@ const DeleteDialogRefTable: React.FC<ComponentProps> = ({ referral }) => {
   }
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger>
-        <div className='hover:animate-pulse px-2'>
-          <DeleteIcon />
-        </div>
+      <DialogTrigger asChild>
+        <Button className='fixed z-90 bottom-10 right-8 w-20 h-20 rounded-full drop-shadow-lg flex justify-center items-center text-white text-4xl hover:drop-shadow-2xl hover:animate-bounce duration-300'>
+          <SwatchIcon />
+        </Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>

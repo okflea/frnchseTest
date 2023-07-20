@@ -1,7 +1,6 @@
 "use client";
 import {
   Sheet,
-  SheetClose,
   SheetContent,
   SheetTrigger,
 } from "@/components/ui/sheet"
@@ -16,6 +15,10 @@ import SignoutIcon from "@/components/ui/icons/SignoutIcon";
 import Image from "next/image";
 import { Separator } from "@/components/ui/separator";
 import SettingsIcon from "@/components/ui/icons/SettingsIcon";
+import CRMIcon from "@/components/ui/icons/CRMIcon";
+import AccenssionIcon from "@/components/ui/icons/AccenssionIcon";
+import RupeeIcon from "@/components/ui/icons/RupeeIcon";
+import ReferralIcon from "@/components/ui/icons/ReferralIcon";
 
 export default function NavSheet() {
   const [isOpen, setIsOpen] = useState(false)
@@ -60,6 +63,54 @@ export default function NavSheet() {
                     <span className="text-sm text-gray-600 pl-2">Dashboard</span>
                   </Link>
                 </li>
+                <li className="transform hover:scale-110 transition-transform duration-300 ">
+                  <Link
+                    as={"/dashboard"}
+                    prefetch={false}
+                    onClick={() => setIsOpen(false)}
+                    href="/dashboard">
+                    <span className="text-gray-800 flex justify-center items-center">
+                      <CRMIcon/>
+                    </span>
+                    <span className="text-sm text-gray-600 pl-2">CRM</span>
+                  </Link>
+                </li>
+                <li className="transform hover:scale-110 transition-transform duration-300 ">
+                  <Link
+                    as={"/dashboard"}
+                    prefetch={false}
+                    onClick={() => setIsOpen(false)}
+                    href="/dashboard">
+                    <span className="text-gray-800 flex justify-center items-center">
+                      <AccenssionIcon/>
+                    </span>
+                    <span className="text-sm text-gray-600 pl-2">Accession</span>
+                  </Link>
+                </li>
+                <li className="transform hover:scale-110 transition-transform duration-300 ">
+                  <Link
+                    as={"/dashboard"}
+                    prefetch={false}
+                    onClick={() => setIsOpen(false)}
+                    href="/dashboard">
+                    <span className="text-gray-800 flex justify-center items-center">
+                      <SettingsIcon/>
+                    </span>
+                    <span className="text-sm text-gray-600 pl-2">Operations</span>
+                  </Link>
+                </li>
+                <li className="transform hover:scale-110 transition-transform duration-300 ">
+                  <Link
+                    as={"/dashboard"}
+                    prefetch={false}
+                    onClick={() => setIsOpen(false)}
+                    href="/dashboard">
+                    <span className="text-gray-800 flex justify-center items-center">
+                      <RupeeIcon/>
+                    </span>
+                    <span className="text-sm text-gray-600 pl-2">Finances</span>
+                  </Link>
+                </li>
 
                 <li className="transform hover:scale-110 transition-transform duration-300 ">
                   <Link
@@ -70,7 +121,7 @@ export default function NavSheet() {
                     <span className="text-gray-800 flex justify-center items-center">
                       <AdminIcon />
                     </span>
-                    <span className="text-sm text-gray-600 pl-2">Master</span>
+                    <span className="text-sm text-gray-600 pl-2">Admin</span>
                   </Link>
                 </li>
 
@@ -81,7 +132,7 @@ export default function NavSheet() {
                     onClick={() => setIsOpen(false)}
                     href="/master/referral">
                     <span className="text-gray-800 flex justify-center items-center">
-                    <SettingsIcon/>
+                    <ReferralIcon/>
                     </span>
                     <span className="text-sm text-gray-600 pl-2">Referral</span>
                   </Link>

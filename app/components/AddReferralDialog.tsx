@@ -35,11 +35,11 @@ const AddReferralDialog = () => {
     const baseUrl = process.env.NEXT_PUBLIC_URL
     const response = await fetch(`${baseUrl}/api/franchhisee/referral`, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${session?.user.accessToken}`,
-        "Accept": "application/json",
-      },
+      // headers: {
+        // "Content-Type": "application/json",
+        // "Authorization": `Bearer ${session?.user.accessToken}`,
+        // "Accept": "application/json",
+      // },
       body: JSON.stringify({
         firstname: values.firstname,
         lastname: values.lastname,
