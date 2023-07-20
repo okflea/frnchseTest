@@ -34,18 +34,18 @@ import { useSession } from "next-auth/react";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useToast } from "@/components/ui/use-toast";
+import getFamiliesData from "../mockData/getfamiles";
 
 const PatientInfoStepForm = () => {
-  interface FamiliesIds {
-    [key: string]: { name: string; franchiseeID: string };
-  }
+  // interface FamiliesIds {
+  //   [key: string]: { name: string; franchiseeID: string };
+  // }
 
   const { toast } = useToast();
   const [designation, setDesignation] = useState("Mr.");
   const [gender, setGender] = useState("Male");
-  const [familiesIds, setFamiliesIds] = useState<FamiliesIds>({}); //[key: string]: string | number; }
-  const [franchiseesIds, setFranchiseesIds] = useState({}); //[key: string]: string | number; }
-  const { data: session } = useSession();
+  const [familiesIds, setFamiliesIds] = useState<{ id: string, name: string }[]>([]); //[key: string]: string | number; }
+  // const { data: session } = useSession();
   const form = useForm<z.infer<typeof PatientFormSchema>>({
     defaultValues: {
       familyId: "",
@@ -101,38 +101,41 @@ const PatientInfoStepForm = () => {
    * and sets the fetched data in the state.
    */
   const getFamilies = async () => {
-    try {
-      const baseUrl = process.env.NEXT_PUBLIC_URL
-      // const response = await fetch("api/franchisor/getFamilies", {
-      const response = await fetch(`${baseUrl}/api/franchisee/getFamilies`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${session?.user.accessToken}`,
-        },
-      });
-      if (!response.ok) {
-        throw new Error("Failed to fetch roles");
-      }
-      const families = await response.json();
-      const familiesIds = families.reduce(
-        (
-          obj: { [x: string]: any },
-          role: {
-            id: string | number;
-            name: any;
-            franchiseeID: string;
-          }
-        ) => {
-          obj[role.id] = { name: role.name, franchiseeID: role.franchiseeID };
-          return obj;
-        },
-        {}
-      );
-      setFamiliesIds(familiesIds);
-    } catch (error) {
-      console.log(error);
-    }
+    const families = await getFamiliesData()
+    console.log(families);
+
+    // try {
+    //   const baseUrl = process.env.NEXT_PUBLIC_URL
+    //   // const response = await fetch("api/franchisor/getFamilies", {
+    //   const response = await fetch(`${baseUrl}/api/franchisee/getFamilies`, {
+    //     method: "GET",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //       Authorization: `Bearer ${session?.user.accessToken}`,
+    //     },
+    //   });
+    //   if (!response.ok) {
+    //     throw new Error("Failed to fetch roles");
+    //   }
+    //   const families = await response.json();
+    //   const familiesIds = families.reduce(
+    //     (
+    //       obj: { [x: string]: any },
+    //       role: {
+    //         id: string | number;
+    //         name: any;
+    //         franchiseeID: string;
+    //       }
+    //     ) => {
+    //       obj[role.id] = { name: role.name, franchiseeID: role.franchiseeID };
+    //       return obj;
+    //     },
+    //     {}
+    //   );
+    //   setFamiliesIds(familiesIds);
+    // } catch (error) {
+    //   console.log(error);
+    // }
   };
 
   useEffect(() => {
@@ -176,7 +179,7 @@ const PatientInfoStepForm = () => {
       values.Country;
     console.log("completeAddress", completeAddress);
     console.log("values", values);
-    
+
 
     // const response = await fetch("api/franchisor/createPatient", {
     //   method: "POST",
@@ -245,21 +248,18 @@ const PatientInfoStepForm = () => {
                           <ScrollArea className="h-[200px]">
                             <SelectGroup>
                               <SelectLabel>Families</SelectLabel>
-                              {familiesIds &&
-                                Object.keys(familiesIds).map(
-                                  (key: string) => (
-                                    <SelectItem value={key} key={key}>
-                                      {
-                                        // familiesIds[
-                                        //   key as keyof typeof familiesIds
-                                        // ]
-                                        familiesIds[
-                                          key as keyof typeof familiesIds
-                                        ].name
-                                      }
-                                    </SelectItem>
-                                  )
-                                )}
+                              {
+                                familiesIds.map((family) => {
+                                  console.log(family);
+                                  return (<SelectItem
+                                    key={family.id}
+                                    value={family.name}
+                                  >
+                                    {family.name}
+                                  </SelectItem>)
+                                }
+                                )
+                              }
                             </SelectGroup>
                           </ScrollArea>
                         </SelectContent>
@@ -272,55 +272,6 @@ const PatientInfoStepForm = () => {
               )}
             />
 
-            {/* <FormField */}
-            {/*   control={form.control} */}
-            {/*   name="franchiseeId" */}
-            {/*   render={({ field }) => ( */}
-            {/*     <FormItem > */}
-            {/*       <FormLabel>Select your franchisee name</FormLabel> */}
-            {/*       <FormControl> */}
-            {/*         <div> */}
-            {/*           <Select */}
-            {/*             onValueChange={field.onChange} */}
-            {/*             value={form.getValues("franchiseeId")} */}
-            {/*             disabled={!!form.getValues("familyId")} */}
-            {/*           > */}
-            {/*             <SelectTrigger className="w-5/6"> */}
-            {/*               <SelectValue placeholder="Select your franchisee name"> */}
-            {/*                 {form.getValues("familyId") */}
-            {/*                   ? franchiseesIds[ */}
-            {/*                   familiesIds[form.getValues("familyId")] */}
-            {/*                     .franchiseeID as keyof typeof franchiseesIds */}
-            {/*                   ] */}
-            {/*                   : form.getValues("familyId")} */}
-            {/*               </SelectValue> */}
-            {/*             </SelectTrigger> */}
-            {/*             <SelectContent> */}
-            {/*               <ScrollArea className="h-[200px]"> */}
-            {/*                 <SelectGroup> */}
-            {/*                   <SelectLabel>Franchisees</SelectLabel> */}
-            {/*                   {franchiseesIds && */}
-            {/*                     Object.keys(franchiseesIds).map( */}
-            {/*                       (key: string) => ( */}
-            {/*                         <SelectItem value={key} key={key}> */}
-            {/*                           { */}
-            {/*                             franchiseesIds[ */}
-            {/*                             key as keyof typeof franchiseesIds */}
-            {/*                             ] */}
-            {/*                           } */}
-            {/*                         </SelectItem> */}
-            {/*                       ) */}
-            {/*                     )} */}
-            {/*                 </SelectGroup> */}
-            {/*               </ScrollArea> */}
-            {/*             </SelectContent> */}
-            {/*           </Select> */}
-            {/*         </div> */}
-            {/*       </FormControl> */}
-            {/*       <FormMessage /> */}
-            {/*     </FormItem> */}
-            {/*   )} */}
-            {/* /> */}
 
             <div className="flex flex-row">
               <FormItem className="w-[120px]">
@@ -369,7 +320,7 @@ const PatientInfoStepForm = () => {
                     <RadioGroup
                       onValueChange={(value: any) => setGender(value)}
                       value={gender}
-                      className="flex flex-row space-y-1 space-x-2"
+                      className="flex flex-row space-x-2"
                     >
                       <FormItem className="flex items-center ">
                         <FormControl>

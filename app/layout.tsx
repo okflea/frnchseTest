@@ -6,8 +6,8 @@ import { Montserrat } from 'next/font/google'
 const montserrat = Montserrat({ subsets: ['latin'] })
 
 export const metadata = {
-  title: 'Bharat Lab Franchisor Application',
-  description: 'Bharat Lab Franchisor Application',
+  title: 'Bharat Lab Franchisee Application',
+  description: 'Bharat Lab Franchisee Application',
 }
 
 export default function RootLayout({

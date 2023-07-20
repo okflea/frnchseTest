@@ -2,7 +2,7 @@
 import { signIn, useSession } from "next-auth/react"
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useForm } from "react-hook-form";
@@ -90,11 +90,8 @@ const LoginForm = () => {
               <FormItem>
                 <FormLabel className="text-slate-600">Email</FormLabel>
                 <FormControl>
-                  <Input className="glass rounded-2xl" type="email" placeholder="example@gmail.com" {...field} />
+                  <Input className="glass rounded-2xl" type="email" placeholder="Enter your Email" {...field} />
                 </FormControl>
-                <FormDescription>
-                  Enter your Email
-                </FormDescription>
                 <FormMessage />
               </FormItem>
             )}
@@ -107,11 +104,8 @@ const LoginForm = () => {
               <FormItem>
                 <FormLabel className="text-slate-600">Password</FormLabel>
                 <FormControl >
-                  <Input className="glass rounded-2xl" type="password" placeholder="Pa55w0rd" {...field} />
+                  <Input className="glass rounded-2xl" type="password" placeholder="Enter your password" {...field} />
                 </FormControl>
-                <FormDescription>
-                  Enter your password
-                </FormDescription>
                 <FormMessage />
               </FormItem>
             )}

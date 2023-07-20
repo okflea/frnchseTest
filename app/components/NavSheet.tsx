@@ -125,7 +125,7 @@ export default function NavSheet() {
                   </Link>
                 </li>
 
-                <li className="ml-8 transform hover:scale-110 transition-transform duration-300 ">
+                <li className="transform hover:scale-110 transition-transform duration-300 ">
                   <Link
                     as={"/master/referral"}
                     prefetch={false}
