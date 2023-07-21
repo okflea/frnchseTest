@@ -25,18 +25,18 @@ const Stepper: React.FC<StepperProps> = ({ currentStep, setCurrentStep }) => {
           </div>
         ))}
       </div>
-      {!complete && (
-        <button
-          className="btn"
-          onClick={() => {
-            currentStep === steps.length
-              ? setComplete(true)
-              : setCurrentStep((prev) => prev + 1);
-          }}
-        >
-          {currentStep === steps.length ? "Finish" : "Next"}
-        </button>
-      )}
+      {/* {!complete && ( */}
+      {/*   <button */}
+      {/*     className="btn" */}
+      {/*     onClick={() => { */}
+      {/*       currentStep === steps.length */}
+      {/*         ? setComplete(true) */}
+      {/*         : setCurrentStep((prev) => prev + 1); */}
+      {/*     }} */}
+      {/*   > */}
+      {/*     {currentStep === steps.length ? "Finish" : "Next"} */}
+      {/*   </button> */}
+      {/* )} */}
     </>
   );
 };

@@ -17,8 +17,8 @@ export const PatientFormSchema = z.object({
   District: z.string().nonempty("District is required"),
   PinCode: z.string().nonempty("Pin Code is required"),
   Country: z.string().nonempty("Country is required"),
-  passportNumber: z.string().regex(passportRegex, "Invalid Passport Number"),
-  AadharNumber: z.string().regex(aadharRegex, "Invalid Aadhar Number"),
+  passportNumber: z.string(),
+  AadharNumber: z.string(),
   franchiseeId: z.string(),
   familyId: z.string(),
 });

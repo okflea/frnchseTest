@@ -9,6 +9,7 @@ import PatientInfoStepForm from "./PatientInfoStepForm"
 const FloatingMenu = () => {
   const [open, setOpen] = useState(false)
   const [currentStep, setCurrentStep] = useState(1)
+  const [data, setData] = useState({})
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
@@ -16,12 +17,12 @@ const FloatingMenu = () => {
           <SwatchIcon />
         </Button>
       </DialogTrigger>
-      <DialogContent className="w-full" >
+      <DialogContent className="h-5/6 " >
         <DialogHeader>
-          <DialogTitle>Test Booking Form</DialogTitle>
+          <DialogTitle className="text-center">Test Booking Form</DialogTitle>
+          <Stepper currentStep={currentStep} setCurrentStep={setCurrentStep} />
         </DialogHeader>
-        <Stepper currentStep={currentStep} setCurrentStep={setCurrentStep} />
-        <PatientInfoStepForm />
+        { currentStep === 1 && <PatientInfoStepForm setCurrentStep={setCurrentStep} setData={setData} /> }
       </DialogContent>
     </Dialog >
   )

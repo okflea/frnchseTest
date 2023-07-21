@@ -36,7 +36,11 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { useToast } from "@/components/ui/use-toast";
 import getFamiliesData from "../mockData/getfamiles";
 
-const PatientInfoStepForm = () => {
+type PatientInfoStepFormProps = {
+  setCurrentStep: React.Dispatch<React.SetStateAction<number>>;
+  setData: React.Dispatch<React.SetStateAction<any>>;
+};
+const PatientInfoStepForm : React.FC<PatientInfoStepFormProps> = ({setCurrentStep, setData}) => {
   // interface FamiliesIds {
   //   [key: string]: { name: string; franchiseeID: string };
   // }
@@ -103,7 +107,7 @@ const PatientInfoStepForm = () => {
   const getFamilies = async () => {
     const families = await getFamiliesData()
     console.log(families);
-
+    // setFamiliesIds(families);
     // try {
     //   const baseUrl = process.env.NEXT_PUBLIC_URL
     //   // const response = await fetch("api/franchisor/getFamilies", {
@@ -180,6 +184,10 @@ const PatientInfoStepForm = () => {
     console.log("completeAddress", completeAddress);
     console.log("values", values);
 
+    setData({
+      ...values
+    })
+    setCurrentStep(2)
 
     // const response = await fetch("api/franchisor/createPatient", {
     //   method: "POST",
@@ -492,7 +500,7 @@ const PatientInfoStepForm = () => {
                 </FormItem>
               )}
             />
-            <Button type="submit">Submit</Button>
+            <Button type="submit">Proceed</Button>
           </form>
         </Form>
       </ScrollArea>
